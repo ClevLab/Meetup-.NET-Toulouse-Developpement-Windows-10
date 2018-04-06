@@ -1,0 +1,78 @@
+﻿<Page
+    x:Class="SamplesMeetup.Views.AnimationsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SamplesMeetup.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Storyboard x:Name="StoryboardRectangleManipulation">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="rectangleStoryboard">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="100">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="150">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="rectangleStoryboard">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="50">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
+
+    <Grid x:Name="gridLayout" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Animations" Style="{ThemeResource TextBlockHeaderStyle}"/>
+
+        <RelativePanel Grid.Row="1">
+            <!-- Storyboard -->
+            <StackPanel Padding="20,10" x:Name="blockStoryboard">
+                <TextBlock Text="Storyboard"/>
+                <Button x:Name="buttonStoryboard" Margin="0,10" Content="Start" Click="buttonStoryboard_Click"/>
+
+                <Rectangle x:Name="rectangleStoryboard" Fill="DarkRed" Height="100" Width="100" RenderTransformOrigin="0.5,0.5">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </StackPanel>
+
+            <!-- Composition -->
+            <StackPanel x:Name="blockComposition" Padding="20,10" RelativePanel.Below="blockStoryboard">
+                <TextBlock Text="Composition"/>
+                <Button x:Name="buttonComposition" Margin="0,10" Content="Start" Click="buttonComposition_Click"/>
+
+                <StackPanel>
+                    <Rectangle x:Name="rectangleComposition" Fill="DarkTurquoise" Height="100" Width="100"/>
+                    
+                    <Rectangle x:Name="rectangleCompositionExpression" Margin="0,20,0,0" Fill="DarkGreen" Height="100" Width="100"/>
+                </StackPanel>
+            </StackPanel>
+            
+            <!-- Composition -->
+            <StackPanel Padding="20,10" RelativePanel.Below="blockComposition">
+                
+            </StackPanel>
+        </RelativePanel>
+
+    </Grid>
+</Page>

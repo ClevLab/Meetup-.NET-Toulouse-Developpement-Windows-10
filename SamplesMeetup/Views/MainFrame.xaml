@@ -1,0 +1,90 @@
+﻿<Page
+    x:Class="SamplesMeetup.Views.MainFrame"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SamplesMeetup.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="visualStateGroup">
+                <VisualState x:Name="visualStateFull">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1000"/>
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="splitViewRoot.DisplayMode" Value="CompactInline"/>
+                        <Setter Target="splitViewRoot.IsPaneOpen" Value="True"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="visualStateDefault">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="750"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="splitViewRoot.DisplayMode" Value="CompactOverlay"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="visualStateMin">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="500"/>
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="splitViewRoot.DisplayMode" Value="CompactOverlay"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="visualStatePhone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="splitViewRoot.DisplayMode" Value="Overlay"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
+        <SplitView x:Name="splitViewRoot" DisplayMode="CompactInline" CompactPaneLength="48" OpenPaneLength="300">
+            <SplitView.Pane>
+                <StackPanel Margin="0,48,0,0">
+                    <Button x:Name="buttonVisualStateManager" Height="48" Style="{ThemeResource ButtonNoStyle}" HorizontalContentAlignment="Stretch" Click="buttonVisualStateManager_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Width="48" FontFamily="Segoe MDL2 Assets" Glyph="&#xEA6C;"/>
+                            <TextBlock Text="Visual State Manager" Style="{ThemeResource TextBlockMenuStyle}"/>
+                        </StackPanel>
+                    </Button>
+                    
+                    <Button x:Name="buttonAnimations" Height="48" Style="{ThemeResource ButtonNoStyle}" HorizontalContentAlignment="Stretch" Click="buttonAnimations_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Width="48" FontFamily="Segoe MDL2 Assets" Glyph="&#xEA4E;"/>
+                            <TextBlock Text="Animations" Style="{ThemeResource TextBlockMenuStyle}"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="buttonInk" Height="48" Style="{ThemeResource ButtonNoStyle}" HorizontalContentAlignment="Stretch" Click="buttonInk_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Width="48" FontFamily="Segoe MDL2 Assets" Glyph="&#xEDC6;"/>
+                            <TextBlock Text="Ink" Style="{ThemeResource TextBlockMenuStyle}"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </SplitView.Pane>
+
+            <SplitView.Content>
+                <!-- Frame Master -->
+                <Frame x:Name="frameMaster"/>
+            </SplitView.Content>
+        </SplitView>
+
+        <!-- Navigations -->
+        <ToggleButton Background="{ThemeResource ForegroundBrush}" Style="{StaticResource SplitViewTogglePaneButtonStyle}" IsChecked="{Binding IsPaneOpen, ElementName=splitViewRoot, Mode=TwoWay}"/>
+    </Grid>
+</Page>
